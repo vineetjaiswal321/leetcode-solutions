@@ -18,6 +18,18 @@ class Solution {
             }
         }
     }
+    public void dfs(int i, boolean[] visited, int[][] isConnected)
+    {
+        int n=isConnected.length;
+        visited[i]=true;
+        for(int j=0;j<n;j++)
+        {
+            if(isConnected[i][j]==1 && visited[j]==false)
+            {
+                dfs(j, visited, isConnected);
+            }
+        }
+    }
     public int findCircleNum(int[][] isConnected) {
         int n=isConnected.length, count=0;
         boolean[] visited=new boolean[n];
@@ -25,7 +37,8 @@ class Solution {
         {
             if(!visited[i])
             {
-                bfs(i, visited, isConnected);
+                //bfs(i, visited, isConnected);
+                dfs(i, visited, isConnected);
                 count++;
             }
         }
