@@ -49,6 +49,18 @@ class Solution {
             }
         }
     }
+    public void dfs(int i, int j, boolean[][] visted, char[][] grid)
+    {
+        if(i<0 || i>grid.length-1 || j<0 || j>grid[0].length-1 || visted[i][j]==true || grid[i][j]=='0')    return; 
+        visted[i][j]=true;
+        dfs(i+1, j, visted, grid);
+        
+        dfs(i-1, j, visted, grid);
+        
+        dfs(i, j+1, visted, grid);
+        
+        dfs(i, j-1, visted, grid);
+    }
     public int numIslands(char[][] grid) {
         int m=grid.length, n=grid[0].length, count=0;
         boolean[][] visted=new boolean[m][n];
@@ -58,7 +70,8 @@ class Solution {
             {
                 if(grid[i][j]=='1' && !visted[i][j])
                 {
-                    bfs(i, j, visted, grid);
+                    //bfs(i, j, visted, grid);
+                    dfs(i, j, visted, grid);
                     count++;
                 }
             }
