@@ -1,81 +1,51 @@
 class Solution {
     class Pair{
-        int row;
-        int col;
-        Pair(int row, int col)
-        {
-            this.row=row;
-            this.col=col;
+        int i;
+        int j;
+        Pair(int i, int j){
+            this.i=i;
+            this.j=j;
         }
     }
-    public void bfs(int i, int j, boolean[][] visted, char[][] grid)
-    {
-        int m=grid.length, n=grid[0].length;
+    public void bfs(int row, int col, boolean[][] vis, char[][] grid){
+        int m=grid.length;
+        int n=grid[0].length;
         Queue<Pair> q=new LinkedList<>();
-        q.add(new Pair(i, j));
-        visted[i][j]=true;
-        while(q.size()>0)
-        {
-            Pair front=q.remove();
-            int row=front.row;
-            int col=front.col;
+        q.add(new Pair(row, col));
+        vis[row][col]=true;
 
-            //top : row-1, col
-            if(row>0 && !visted[row-1][col] && grid[row-1][col]=='1')
-            {
-                q.add(new Pair(row-1, col));
-                visted[row-1][col]=true;
-            }
+        while(q.size()>0){
+            Pair p=q.poll();
+            int r=p.i;
+            int c=p.j;
 
-            //bottom : row+1, col
-            if(row+1<m && !visted[row+1][col] && grid[row+1][col]=='1')
-            {
-                q.add(new Pair(row+1, col));
-                visted[row+1][col]=true; 
-            }
-
-            //left : row, col-1
-            if(col>0 && !visted[row][col-1] && grid[row][col-1]=='1')
-            {
-                q.add(new Pair(row, col-1));
-                visted[row][col-1]=true; 
-            }
-
-            //right : row, col+1
-            if(col+1<n && !visted[row][col+1] && grid[row][col+1]=='1')
-            {
-                q.add(new Pair(row, col+1));
-                visted[row][col+1]=true; 
+            for(int delrow=-1;delrow<=1;delrow++){
+                for(int delcol=-1;delcol<=1;delcol++){
+                    if(Math.abs(delrow) + Math.abs(delcol) != 1) continue;
+                    int newR=r+delrow;
+                    int newC=c+delcol;
+                    if(newR>=0 && newR<m && newC>=0 && newC<n && !vis[newR][newC] && grid[newR][newC]=='1'){
+                        vis[newR][newC]=true;
+                        q.add(new Pair(newR, newC));
+                    }
+                }
             }
         }
-    }
-    public void dfs(int i, int j, boolean[][] visted, char[][] grid)
-    {
-        if(i<0 || i>grid.length-1 || j<0 || j>grid[0].length-1 || visted[i][j]==true || grid[i][j]=='0')    return; 
-        visted[i][j]=true;
-        dfs(i+1, j, visted, grid);
-        
-        dfs(i-1, j, visted, grid);
-        
-        dfs(i, j+1, visted, grid);
-        
-        dfs(i, j-1, visted, grid);
     }
     public int numIslands(char[][] grid) {
-        int m=grid.length, n=grid[0].length, count=0;
-        boolean[][] visted=new boolean[m][n];
+        int m=grid.length, n=grid[0].length;
+        boolean[][] vis=new boolean[m][n];
+        int cnt=0;
         for(int i=0;i<m;i++)
         {
             for(int j=0;j<n;j++)
             {
-                if(grid[i][j]=='1' && !visted[i][j])
-                {
-                    //bfs(i, j, visted, grid);
-                    dfs(i, j, visted, grid);
-                    count++;
+                if(!vis[i][j] && grid[i][j]=='1'){
+                    cnt++;
+                    bfs(i, j, vis, grid);
                 }
             }
         }
-        return count;
+        return cnt;
     }
 }
