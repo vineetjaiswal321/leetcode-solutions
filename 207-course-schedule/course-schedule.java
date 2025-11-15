@@ -4,7 +4,7 @@ class Solution {
         ArrayList<ArrayList<Integer>> adj=new ArrayList<>();
         for(int i=0;i<V;i++)    adj.add(new ArrayList<>());
         for(int[] edge : edges){
-            adj.get(edge[0]).add(edge[1]);
+            adj.get(edge[1]).add(edge[0]);
         }
         
         int[] inDegree=new int[V];
