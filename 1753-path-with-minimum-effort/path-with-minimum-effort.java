@@ -24,7 +24,7 @@ class Solution {
             int row=p.row;
             int col=p.col;
             int d=p.dist;
-
+            if(row==m-1 && col==n-1)    return d;
             int[] delrow={-1, 0, 1, 0};
             int[] delcol={0, 1, 0, -1};
 
