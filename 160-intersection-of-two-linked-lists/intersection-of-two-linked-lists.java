@@ -31,11 +31,10 @@ public class Solution {
             }
         }
 
-        while(headA!=null){
-            if(headA==headB)    return headA;
+        while(headA!=headB){
             headA=headA.next;
             headB=headB.next;
         }
-        return null;
+        return headA;
     }
 }
