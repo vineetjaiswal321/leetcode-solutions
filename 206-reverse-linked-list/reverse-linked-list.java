@@ -16,13 +16,11 @@ class Solution {
             st.push(temp.val);
             temp=temp.next;
         }
-        ListNode curr=new ListNode(-1);
-        ListNode newHead=curr;
+        temp=head;
         while(!st.isEmpty()){
-            ListNode neww=new ListNode(st.pop());
-            curr.next=neww;
-            curr=curr.next;
+            temp.val=st.pop();
+            temp=temp.next;
         }
-        return newHead.next;
+        return head;
     }
 }
