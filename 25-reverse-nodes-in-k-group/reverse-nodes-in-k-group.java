@@ -35,15 +35,13 @@ class Solution {
             ListNode nextNode=kthNode.next;
             kthNode.next=null;
             ListNode revHead=reverseList(temp);
-            
             if(temp==head){
-                prev=temp;
                 head=kthNode;
             }
             else{
                 prev.next=revHead;
-                prev=temp;
             }
+            prev=temp;
             temp=nextNode;
         }
         return head;
