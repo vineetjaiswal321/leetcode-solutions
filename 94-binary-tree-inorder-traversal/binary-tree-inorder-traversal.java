@@ -17,7 +17,7 @@ class Solution {
     //left root right
     List<Integer> li;
     public void inOrder(TreeNode root){
-        if(root==null)  return;
+        //if(root==null)  return;
         // inOrder(root.left);
         // li.add(root.val);
         // inOrder(root.right);
@@ -28,12 +28,10 @@ class Solution {
                 root=root.left;
             }
             else{
-                if(st.isEmpty()){
-                    break;
-                }
-                root=st.pop();
-                li.add(root.val);
-                root=root.right;
+                if(st.isEmpty())    break;
+                TreeNode node=st.pop();
+                li.add(node.val);
+                root=node.right;
             }
         }
     }
