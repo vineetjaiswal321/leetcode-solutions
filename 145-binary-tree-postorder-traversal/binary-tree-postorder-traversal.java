@@ -21,10 +21,10 @@ class Solution {
         Stack<TreeNode> st2=new Stack<>();
         st1.push(root);
         while(!st1.isEmpty()){
-            TreeNode node=st1.pop();
-            if(node.left!=null)    st1.add(node.left);
-            if(node.right!=null)    st1.add(node.right);
-            st2.push(node);
+            root=st1.pop();
+            if(root.left!=null)    st1.add(root.left);
+            if(root.right!=null)    st1.add(root.right);
+            st2.push(root);
         }
 
         while(!st2.isEmpty()){
