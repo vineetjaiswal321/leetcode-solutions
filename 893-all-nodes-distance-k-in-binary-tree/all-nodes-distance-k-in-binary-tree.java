@@ -14,17 +14,14 @@ class Solution {
         Map<TreeNode, TreeNode> mp=new HashMap<>();
         mp.put(root, null);
         while(!q.isEmpty()){
-            int size=q.size();
-            for(int i=0;i<size;i++){
-                TreeNode node=q.poll();
-                if(node.left!=null){
-                    mp.put(node.left, node);
-                    q.offer(node.left);
-                }
-                if(node.right!=null){
-                    mp.put(node.right, node);
-                    q.offer(node.right);
-                }
+            TreeNode node=q.poll();
+            if(node.left!=null){
+                mp.put(node.left, node);
+                q.offer(node.left);
+            }
+            if(node.right!=null){
+                mp.put(node.right, node);
+                q.offer(node.right);
             }
         }
         Set<TreeNode> isVisted=new HashSet<>();
