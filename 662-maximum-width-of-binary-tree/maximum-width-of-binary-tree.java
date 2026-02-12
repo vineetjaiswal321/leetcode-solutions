@@ -14,7 +14,7 @@
  * }
  */
 class Pair{
-    TreeNode node;
+    TreeNode node; 
     int idx;
     Pair(TreeNode node, int idx){
         this.node=node;
@@ -26,21 +26,23 @@ class Solution {
         int ans=0;
         Queue<Pair> q=new LinkedList<>();
         q.offer(new Pair(root, 0));
-        while(q.size()>0){
+        while(!q.isEmpty()){
             int size=q.size();
-            int min=q.peek().idx;
             int l=0, r=0;
+            int min=q.peek().idx;
             for(int i=0;i<size;i++){
                 Pair p=q.poll();
-                int cur_idx=p.idx-min;
                 TreeNode node=p.node;
-                
+                int idx=p.idx;
+        
+                int cur_idx=idx-min;
                 if(i==0)    l=cur_idx;
                 if(i==size-1)   r=cur_idx;
-                if(node.left!=null) q.offer(new Pair(node.left, cur_idx*2+1));
-                if(node.right!=null) q.offer(new Pair(node.right, cur_idx*2+2));
+
+                if(node.left!=null) q.offer(new Pair(node.left, 2*cur_idx+1));
+                if(node.right!=null) q.offer(new Pair(node.right, 2*cur_idx+2));
             }
-            ans=Math.max(r-l+1, ans);
+            ans=Math.max(ans, r-l+1);
         }
         return ans;
     }
