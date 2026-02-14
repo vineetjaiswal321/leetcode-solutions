@@ -13,8 +13,6 @@
  *     }
  * }
  */
- //preorder :  root, left, right
- //inorder :  left root right
 class Solution {
     public TreeNode createTree(int preL, int preH, int[] preorder, int inL, int inH, int[] inorder, Map<Integer, Integer> mp){
         if(preL>preH || inL>inH)    return null;
