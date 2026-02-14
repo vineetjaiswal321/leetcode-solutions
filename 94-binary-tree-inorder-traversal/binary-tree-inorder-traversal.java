@@ -49,9 +49,7 @@ class Solution {
             }
             else{
                 TreeNode prev=curr.left;
-                while(prev.right!=null && prev.right!=curr){
-                    prev=prev.right;
-                }
+                while(prev.right!=null && prev.right!=curr) prev=prev.right;
                 if(prev.right==null){
                     prev.right=curr;
                     curr=curr.left;
