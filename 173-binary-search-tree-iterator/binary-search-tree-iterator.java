@@ -16,10 +16,7 @@
 class BSTIterator {
     Stack<TreeNode> st=new Stack<>();
     public void pushLeft(TreeNode root){
-        while(root!=null){
-            st.push(root);
-            root=root.left;
-        }
+        for(; root!=null; st.push(root), root=root.left);
     }
     public BSTIterator(TreeNode root) {
         pushLeft(root);
